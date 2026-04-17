@@ -6,8 +6,14 @@ const stats = [
   { value: 100, suffix: "%", label: "Student Focus" },
 ];
 
-function Counter({ end, suffix }) {
-  const [count, setCount] = useState(0);
+// ✅ ADD THIS TYPE
+type CounterProps = {
+  end: number;
+  suffix: string;
+};
+
+function Counter({ end, suffix }: CounterProps) {
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     let start = 0;
@@ -37,9 +43,8 @@ function Counter({ end, suffix }) {
 
 export default function StatsSection() {
   return (
-    <div className="border-t border-gray-200 pt-2 ">
+    <div className="border-t border-gray-200 pt-2">
 
-      {/* Wrapper */}
       <div className="flex gap-0 overflow-x-auto sm:overflow-visible px-2 sm:px-0">
 
         {stats.map((item, index) => (
@@ -48,20 +53,16 @@ export default function StatsSection() {
             className="min-w-[10px] sm:min-w-0 flex-1 text-center group relative"
           >
 
-            {/* Number */}
             <p className="text-xl sm:text-2xl font-extrabold text-[#0a1628] transition-all duration-300 group-hover:scale-110">
               <Counter end={item.value} suffix={item.suffix} />
             </p>
 
-            {/* Label */}
             <p className="text-gray-500 text-xs sm:text-sm mt-1">
               {item.label}
             </p>
 
-            {/* Underline */}
             <div className="h-[2px] w-0 bg-gradient-to-r from-amber-400 to-amber-500 mx-auto mt-2 transition-all duration-300 group-hover:w-10" />
 
-            {/* Divider (desktop only) */}
             {index !== stats.length - 1 && (
               <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 h-8 w-px bg-gray-200" />
             )}
