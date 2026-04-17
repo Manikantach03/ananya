@@ -1,6 +1,18 @@
-import { Calendar, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-const events = [
+// ✅ Define category type
+type Category = 'Academic' | 'Sports' | 'Cultural';
+
+// ✅ Define event type
+type EventType = {
+  date: string;
+  title: string;
+  category: Category;
+  desc: string;
+};
+
+// ✅ Apply type
+const events: EventType[] = [
   {
     date: 'Apr 15',
     title: 'Science Exhibition',
@@ -27,7 +39,8 @@ const events = [
   },
 ];
 
-const categoryColors = {
+// ✅ Type-safe mapping
+const categoryColors: Record<Category, string> = {
   Academic: 'bg-blue-100 text-blue-700',
   Sports: 'bg-emerald-100 text-emerald-700',
   Cultural: 'bg-rose-100 text-rose-700',
@@ -35,10 +48,8 @@ const categoryColors = {
 
 export default function Events() {
   return (
-    <section
-      id="events"
-      className="py-8 bg-gradient-to-br from-[#f8f5ef] via-[#f8f5ef] to-[#f8f5ef]"
-    >
+    <section id="events" className="py-8 bg-[#f8f5ef]">
+
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* HEADER */}
@@ -62,26 +73,24 @@ export default function Events() {
           {events.map((event) => (
             <div
               key={event.title}
-              className="group border border-gray-200 rounded-xl p-4 bg-white hover:shadow-md transition-all duration-300"
+              className="group border border-gray-200 rounded-xl p-4 bg-white hover:shadow-md transition"
             >
 
-              {/* TITLE + DATE */}
               <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-[#0a1628] text-sm group-hover:text-amber-500 transition">
+                <h3 className="font-semibold text-[#0a1628] text-sm group-hover:text-amber-500">
                   {event.title}
                 </h3>
 
-                <span className="text-xs text-gray-500 font-medium">
+                <span className="text-xs text-gray-500">
                   {event.date}
                 </span>
               </div>
 
-              {/* DESC */}
-              <p className="text-xs text-gray-600 leading-relaxed mb-3">
+              <p className="text-xs text-gray-600 mb-3">
                 {event.desc}
               </p>
 
-              {/* CATEGORY */}
+              {/* ✅ NOW WORKS */}
               <span className={`text-xs px-2 py-1 rounded ${categoryColors[event.category]}`}>
                 {event.category}
               </span>
@@ -91,9 +100,8 @@ export default function Events() {
 
         </div>
 
-        {/* RESULTS SECTION */}
+        {/* RESULTS */}
         <div className="mt-10 bg-white border border-gray-200 rounded-xl p-5 text-center shadow-sm">
-
           <p className="text-xs font-semibold text-amber-500 mb-1">
             Academic Achievement
           </p>
@@ -106,13 +114,9 @@ export default function Events() {
             Our students consistently achieve strong academic results every year.
           </p>
 
-          <a
-            href="#rankings"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[#0a1628] hover:text-amber-500 transition"
-          >
+          <a href="#rankings" className="inline-flex items-center gap-1 text-sm font-semibold hover:text-amber-500">
             View Results <ArrowRight className="w-4 h-4" />
           </a>
-
         </div>
 
       </div>

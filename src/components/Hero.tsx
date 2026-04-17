@@ -1,4 +1,4 @@
-import { ChevronDown, Star, Award, Users } from "lucide-react";
+import { Star, Award, Users } from "lucide-react";
 
 export default function Hero() {
   return (
